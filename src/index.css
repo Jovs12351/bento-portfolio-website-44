@@ -24,6 +24,42 @@
   }
 }
 
+/* Animations */
+@keyframes content-load {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-content-load {
+  animation: content-load 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.animate-slide-up-delay {
+  animation: slide-up 0.8s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

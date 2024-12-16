@@ -3,9 +3,12 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 const Index = () => {
   const [time, setTime] = useState(new Date());
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
+    // Trigger intro animation after a small delay
+    setTimeout(() => setIsLoaded(true), 100);
     return () => clearInterval(timer);
   }, []);
 
@@ -36,17 +39,31 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white">
-      <div className="bento-grid">
+      {/* Intro Animation Overlay */}
+      <div className={`fixed inset-0 bg-black transition-opacity duration-1000 pointer-events-none
+        ${isLoaded ? 'opacity-0' : 'opacity-100'}`} 
+      />
+
+      {/* Main Content with Staggered Animation */}
+      <div className={`bento-grid opacity-0 transform translate-y-4
+        ${isLoaded ? 'animate-content-load' : ''}`}>
         {/* Welcome Card */}
         <div className="bento-card col-span-2 group">
           <div className="absolute top-4 right-4 text-xs text-gray-500 font-mono">welcome</div>
           <div className="flex flex-col justify-center h-full">
-            <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-white via-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Hi, I'm <span className="text-blue-400">Your Name</span>
-            </h1>
-            <p className="text-gray-300 text-xl leading-relaxed">
-              A software developer with a passion for creating beautiful and functional web experiences
-            </p>
+            <div className="overflow-hidden">
+              <h1 className={`text-6xl font-bold mb-4 bg-gradient-to-r from-[#9b87f5] via-[#8B5CF6] to-[#D946EF] 
+                bg-clip-text text-transparent transform translate-y-full
+                ${isLoaded ? 'animate-slide-up' : ''}`}>
+                Hi, I'm <span className="text-[#8B5CF6]">Your Name</span>
+              </h1>
+            </div>
+            <div className="overflow-hidden">
+              <p className={`text-gray-300 text-xl leading-relaxed transform translate-y-full
+                ${isLoaded ? 'animate-slide-up-delay' : ''}`}>
+                A software developer with a passion for creating beautiful and functional web experiences
+              </p>
+            </div>
           </div>
         </div>
 
