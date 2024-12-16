@@ -24,20 +24,49 @@
   }
 }
 
-/* Welcome Animation */
+/* Enhanced Welcome Animation */
 .welcome-text {
   opacity: 0;
   animation: welcome-fade-in 0.8s ease-out forwards 0.2s;
+  position: relative;
+  z-index: 10;
+}
+
+.welcome-subtitle {
+  transition: opacity 0.5s ease-out;
+  position: relative;
+  z-index: 10;
+}
+
+.welcome-line {
+  height: 2px;
+  width: 0;
+  background: linear-gradient(to right, transparent, #8B5CF6, transparent);
+  margin: 2rem auto;
+  animation: line-expand 0.8s ease-out forwards 1s;
 }
 
 @keyframes welcome-fade-in {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px) scale(0.95);
+    filter: blur(4px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes line-expand {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 200px;
+    opacity: 1;
   }
 }
 
@@ -45,11 +74,13 @@
 @keyframes content-load {
   0% {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(2rem);
+    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 

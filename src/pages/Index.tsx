@@ -5,15 +5,17 @@ const Index = () => {
   const [time, setTime] = useState(new Date());
   const [isLoaded, setIsLoaded] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showSecondText, setShowSecondText] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     
-    // Welcome sequence timing
+    // Enhanced welcome sequence timing
+    setTimeout(() => setShowSecondText(true), 1000);
     setTimeout(() => {
       setShowWelcome(false);
       setTimeout(() => setIsLoaded(true), 500);
-    }, 2000);
+    }, 3000);
     
     return () => clearInterval(timer);
   }, []);
@@ -45,17 +47,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white">
-      {/* Welcome Animation */}
-      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0F172A] transition-opacity duration-1000
+      {/* Enhanced Welcome Animation */}
+      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#0F172A] to-[#1E293B] transition-opacity duration-1000
         ${showWelcome ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <div className="text-center">
+        <div className="text-center space-y-6 relative">
+          <div className="welcome-glow absolute inset-0 blur-3xl bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-pink-500/30" />
           <h1 className="welcome-text text-7xl font-bold bg-gradient-to-r from-[#9b87f5] via-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
             Welcome to My Portfolio
           </h1>
+          <p className={`welcome-subtitle text-xl text-gray-300 ${showSecondText ? 'opacity-100' : 'opacity-0'}`}>
+            Let's explore my creative journey
+          </p>
+          <div className="welcome-line" />
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Main Content with Enhanced Animation */}
       <div className={`bento-grid opacity-0 transform translate-y-4
         ${isLoaded ? 'animate-content-load' : ''}`}>
         {/* Welcome Card */}
