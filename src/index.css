@@ -20,7 +20,7 @@
   }
 
   body {
-    @apply bg-[#121212] text-foreground font-['Inter'] m-0 p-0;
+    @apply bg-gradient-to-br from-[#121212] to-[#1a1a1a] text-foreground font-['Inter'] m-0 p-0 min-h-screen;
   }
 }
 
@@ -28,25 +28,43 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  padding: 1.5rem;
+  padding: 2rem;
   width: 100%;
-  max-width: 100%;
+  max-width: 1600px;
   min-height: 100vh;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 .bento-card {
-  @apply bg-card p-8 rounded-2xl transition-all duration-300 hover:bg-card-hover;
+  @apply bg-black/20 backdrop-blur-sm p-8 rounded-2xl transition-all duration-300;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  min-height: 200px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.bento-card:hover::before {
+  transform: translateX(100%);
 }
 
 .bento-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  @apply transform -translate-y-2 bg-black/30;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -56,6 +74,6 @@
   }
   
   .bento-card {
-    min-height: 150px;
+    min-height: 200px;
   }
 }
