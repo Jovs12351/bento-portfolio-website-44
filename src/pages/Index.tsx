@@ -4,11 +4,17 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 const Index = () => {
   const [time, setTime] = useState(new Date());
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
-    // Trigger intro animation after a small delay
-    setTimeout(() => setIsLoaded(true), 100);
+    
+    // Welcome sequence timing
+    setTimeout(() => {
+      setShowWelcome(false);
+      setTimeout(() => setIsLoaded(true), 500);
+    }, 2000);
+    
     return () => clearInterval(timer);
   }, []);
 
@@ -39,12 +45,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white">
-      {/* Intro Animation Overlay */}
-      <div className={`fixed inset-0 bg-black transition-opacity duration-1000 pointer-events-none
-        ${isLoaded ? 'opacity-0' : 'opacity-100'}`} 
-      />
+      {/* Welcome Animation */}
+      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0F172A] transition-opacity duration-1000
+        ${showWelcome ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="text-center">
+          <h1 className="welcome-text text-7xl font-bold bg-gradient-to-r from-[#9b87f5] via-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
+            Welcome to My Portfolio
+          </h1>
+        </div>
+      </div>
 
-      {/* Main Content with Staggered Animation */}
+      {/* Main Content */}
       <div className={`bento-grid opacity-0 transform translate-y-4
         ${isLoaded ? 'animate-content-load' : ''}`}>
         {/* Welcome Card */}

@@ -24,7 +24,24 @@
   }
 }
 
-/* Animations */
+/* Welcome Animation */
+.welcome-text {
+  opacity: 0;
+  animation: welcome-fade-in 0.8s ease-out forwards 0.2s;
+}
+
+@keyframes welcome-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content Animations */
 @keyframes content-load {
   0% {
     opacity: 0;
