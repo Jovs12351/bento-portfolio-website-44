@@ -20,7 +20,7 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-[#121212] to-[#1a1a1a] text-foreground font-['Inter'] m-0 p-0 min-h-screen;
+    @apply bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-foreground font-['Inter'] m-0 p-0 min-h-screen;
   }
 }
 
@@ -37,13 +37,14 @@
 }
 
 .bento-card {
-  @apply bg-black/20 backdrop-blur-sm p-8 rounded-2xl transition-all duration-300;
+  @apply bg-black/10 backdrop-blur-md p-8 rounded-2xl transition-all duration-500;
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-height: 250px;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .bento-card::before {
@@ -58,13 +59,31 @@
   transition: transform 0.5s;
 }
 
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(255, 255, 255, 0.06) 0%, 
+              transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
 .bento-card:hover::before {
   transform: translateX(100%);
 }
 
 .bento-card:hover {
-  @apply transform -translate-y-2 bg-black/30;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  @apply transform -translate-y-2 bg-black/20;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.bento-card:hover::after {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
